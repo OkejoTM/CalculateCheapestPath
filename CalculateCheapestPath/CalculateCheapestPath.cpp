@@ -68,6 +68,18 @@ vector<string> readDataFromFile(vector<vector<int>>& roads, vector<int>& costs)
 	return citiesLabes;
 }
 
+void multiplieCostsAndRoads(vector<vector<int>>& roads, vector<int>& costs, int amountCities) {
+
+	for (int i = 0; i < amountCities - 1; i++) {
+		for (int j = i; j < amountCities; j++) {
+			roads[i][j] = roads[i][j] * costs[i];
+			roads[j][i] = roads[j][i] * costs[j];
+		}
+	}
+
+}
+
+
 
 int main() {
 
