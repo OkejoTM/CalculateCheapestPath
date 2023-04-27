@@ -68,7 +68,7 @@ vector<string> readDataFromFile(vector<vector<int>>& roads, vector<int>& costs)
 	return citiesLabes;
 }
 
-void multiplieCostsAndRoads(vector<vector<int>>& roads, vector<int>& costs, int amountCities) {
+void multiplyCostsAndRoads(vector<vector<int>>& roads, vector<int>& costs, int amountCities) {
 
 	for (int i = 0; i < amountCities - 1; i++) {
 		for (int j = i; j < amountCities; j++) {
@@ -79,15 +79,51 @@ void multiplieCostsAndRoads(vector<vector<int>>& roads, vector<int>& costs, int 
 
 }
 
+int findCheapestPath(vector<vector<int>> roads, int amountRoads, int source) {
+
+	// Инициализировать все растояния 
+	vector<int> distances(amountRoads, INT_MAX);
+	distances[source] = 0;
+
+	priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pQueue;
+	pQueue.push(make_pair(0, source));
+
+	while (!pQueue.empty()) {
+		int u = pQueue.top().second;
+		pQueue.pop();
+
+		for (int v = 0; v < amountRoads; v++) {
+			if (roads[u][v] != 0 && distances[v] > distances[u] + roads[u][v]) {
+				distances[v] = distances[u] + roads[u][v];
+				pQueue.push(make_pair(distances[v], v));
+			}
+		}
+	}
+	return distances.back();
+
+}
+
+void outputResultToFile(vector<vector<int>> roads, vector<string> citiesLabels)
+{
+	//вывод в файл
+	ofstream fout;
+	fout.open("output.txt");
+	fout << findCheapestPath(roads, citiesLabels.size(), 0);
+	fout.close();
+}
 
 
 int main() {
-
+	vector<vector<int>> matrixRoads;
+	vector<int> costs;
 	//Считать данные из файла
+	auto citiesLabels = readDataFromFile(matrixRoads, costs);
 
 	// Преобразовать дороги и стоимости в матрицу смежности
+	multiplyCostsAndRoads(matrixRoads, costs, costs.size());
 
 	// Вывести решение в файл
+	outputResultToFile(matrixRoads, citiesLabels);
 
 	return 0;
 }
