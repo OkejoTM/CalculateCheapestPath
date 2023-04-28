@@ -1,10 +1,12 @@
 ﻿#include <iostream>
 #include <fstream>
+#include <filesystem>
 #include <string>
 #include <vector>
 #include <sstream>
 #include <queue>
 #include <exception>
+
 using namespace std;
 
 class InvalidInputFileException : public std::exception {
@@ -203,16 +205,18 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 	
-	std::ifstream input_file(argv[1]);
+	std::ifstream inputFile(argv[1]);
 
-	if (!input_file.is_open()) {
+	if (!inputFile.is_open()) {
 		std::cerr << "Неверно указан файл с входными данными. Возможно, файл не существует." << argv[1] << '\n';
 		return 1;
 	}
+	
+	filesystem::path output_path = filesystem::path(argv[2]);
 
 	if (!(filesystem::exists(output_path.parent_path()) &&
-		  filesystem::is_directory(output_path.parent_path()) &&
-		  output_path.has_filename()))
+		filesystem::is_directory(output_path.parent_path()) &&
+		output_path.has_filename()))
 	{
 		std::cerr << "Неверно указан файл для выходных данных. "
 			"Возможно указанного расположения не существует или нет прав на запись." << '\n';
@@ -224,8 +228,8 @@ int main(int argc, char* argv[]) {
 		std::cerr << "Неверно указан файл для выходных данных. "
 			"Возможно указанного расположения не существует или нет прав на запись." << '\n';
 		return 1;
-	}
-	*/
+	}*/
+	
 
 	//Считать данные из файла
 	try
@@ -251,6 +255,8 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 	
+	// outputFile 
+
 
 	return 0;
 }
