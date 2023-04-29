@@ -31,13 +31,9 @@ private:
 	std::string m_message;
 };
 
-//vector<string> readDataFromFile(const std::string& inputFilePath,vector<vector<int>>& roads, vector<int>& costs)
-vector<string> readDataFromFile(vector<vector<int>>& roads, vector<int>& costs)
-{	
-	// Открыть файл
-	ifstream file;
-	//std::ifstream file(inputFilePath);
-	file.open("input.csv");
+vector<string> readDataFromFile(const std::string& inputFilePath, vector<vector<int>>& roads, vector<int>& costs)
+{
+	std::ifstream file(inputFilePath);
 
 	// Считать первую строку файла
 	string line;
@@ -58,32 +54,43 @@ vector<string> readDataFromFile(vector<vector<int>>& roads, vector<int>& costs)
 	costs.resize(citiesLabes.size(), 0);
 
 	std::getline(file, line);
-	stringstream ssCost(line);
+	ss.clear();
+	ss.str(line);
 	int costValueCol = 0;
 	string costVal;
 
 	// Считывание стоимости дорог
-	while (std::getline(ssCost, costVal, ';')) {
-		
-		 bool containsDigits = all_of(begin(costVal), end(costVal), isdigit); // Проверка, что строка содержит только цифры.
-		 if (costVal != "") {
-			 if (containsDigits) {
-				 costs[costValueCol] = stoi(costVal);				 
-			 }			 
-			 else {
-				 throw InvalidInputFileException("Неправильная запись стоимости за литр. "
-							"Убедитесь, что стоимстость за литр является неотрицательным числом.\n");
-			 }
+	while (std::getline(ss, costVal, ';')) {
+
+		bool containsDigits = all_of(begin(costVal), end(costVal), isdigit); // Проверка, что строка содержит только цифры.
+		if (costVal != "") {
+			if (containsDigits) {
+				costs[costValueCol] = stoi(costVal);
+			}
+			else {
+				throw InvalidInputFileException("Неправильная запись стоимости за литр. "
+					"Убедитесь, что стоимстость за литр является неотрицательным числом.\n");
+			}
 		}
 		costValueCol++;
 		if (costValueCol > citiesLabes.size()) {
 			throw InvalidInputFileException("Во входной строке неправильное количество параметров. "
-						"Убедитесь, что количество цен за стоимость бензина равно количеству городов\n");
+				"Убедитесь, что количество цен за стоимость бензина равно количеству городов\n");
 		}
 	}
 
 	std::getline(file, line); // Считать пустую строку
 	std::getline(file, line); // Считать названия город
+
+	vector<string> matrixCitiesLabes;
+	ss.clear();
+	ss.str(line);
+	// Заполнить вектор названиями городов
+	while (std::getline(ss, label, ';')) {
+		if (label != "") {
+			matrixCitiesLabes.push_back(label);
+		}
+	}
 
 	//заполнение матрицы смежности из файла
 	int row = 0;
@@ -94,17 +101,26 @@ vector<string> readDataFromFile(vector<vector<int>>& roads, vector<int>& costs)
 		int col = 0;
 		while (getline(ss, value, ';')) {
 			bool valueContainsDigits = all_of(begin(value), end(value), isdigit); // Проверка, что строка содержит только цифры.
-			
+
+			if (col == 0 && citiesLabes[row] != value) {
+				throw InvalidInputFileException("Названия города записаны неверно."
+					"Убедитесь, что названия городов в таблице дорог соответствуют названиям городов со стоимостью бензина.\n");
+			}
+			else if (col == 0 && matrixCitiesLabes[row] != value) {
+				throw InvalidInputFileException("Названия города несимметричны."
+					"Убедитесь, что названия городов в таблице дорог записаны верно.\n");
+			}
+
 			if (value != "" && col > 0) {
 				if (valueContainsDigits) {
 					roads[row][col - 1] = stoi(value);
-				}				
+				}
 				else {
 					throw InvalidInputFileException("Неправильная запись задаваемого количества литров между городами. "
 						"Убедитесь, что количество литров для дороги является неотрицательным числом.\n");
 				}
 			}
-			
+
 			col++;
 			if (col > citiesLabes.size() + 1) {
 				throw InvalidInputFileException("Во входной строке неправильное количество параметров. "
@@ -123,11 +139,122 @@ vector<string> readDataFromFile(vector<vector<int>>& roads, vector<int>& costs)
 	// Вернуть вектор названий городов
 	return citiesLabes;
 }
+//vector<string> readDataFromFile(vector<vector<int>>& roads, vector<int>& costs)
+//{	
+//	// Открыть файл
+//	ifstream file;
+//	//std::ifstream file(inputFilePath);
+//	file.open("input.csv");
+//
+//	// Считать первую строку файла
+//	string line;
+//	std::getline(file, line);
+//	stringstream ss(line);
+//
+//	string label;
+//	vector<string> citiesLabes;
+//
+//
+//	// Заполнить вектор названиями городов
+//	while (std::getline(ss, label, ';')) {
+//		if (label != "") {
+//			citiesLabes.push_back(label);
+//		}
+//	}
+//	roads.resize(citiesLabes.size(), vector<int>(citiesLabes.size(), 0));
+//	costs.resize(citiesLabes.size(), 0);
+//
+//	std::getline(file, line);
+//	ss.clear();
+//	ss.str(line);	
+//	int costValueCol = 0;
+//	string costVal;
+//
+//	// Считывание стоимости дорог
+//	while (std::getline(ss, costVal, ';')) {
+//		
+//		 bool containsDigits = all_of(begin(costVal), end(costVal), isdigit); // Проверка, что строка содержит только цифры.
+//		 if (costVal != "") {
+//			 if (containsDigits) {
+//				 costs[costValueCol] = stoi(costVal);				 
+//			 }			 
+//			 else {
+//				 throw InvalidInputFileException("Неправильная запись стоимости за литр. "
+//							"Убедитесь, что стоимстость за литр является неотрицательным числом.\n");
+//			 }
+//		}
+//		costValueCol++;
+//		if (costValueCol > citiesLabes.size()) {
+//			throw InvalidInputFileException("Во входной строке неправильное количество параметров. "
+//						"Убедитесь, что количество цен за стоимость бензина равно количеству городов\n");
+//		}
+//	}
+//
+//	std::getline(file, line); // Считать пустую строку
+//	std::getline(file, line); // Считать названия город
+//	
+//	vector<string> matrixCitiesLabes;
+//	ss.clear();
+//	ss.str(line);
+//	// Заполнить вектор названиями городов
+//	while (std::getline(ss, label, ';')) {
+//		if (label != "") {
+//			matrixCitiesLabes.push_back(label);
+//		}
+//	}
+//
+//	//заполнение матрицы смежности из файла
+//	int row = 0;
+//	while (std::getline(file, line)) {
+//		stringstream ss(line);
+//		string value;
+//
+//		int col = 0;
+//		while (getline(ss, value, ';')) {
+//			bool valueContainsDigits = all_of(begin(value), end(value), isdigit); // Проверка, что строка содержит только цифры.
+//			
+//			if (col == 0 && citiesLabes[row] != value) {
+//				throw InvalidInputFileException("Названия города записаны неверно."
+//						"Убедитесь, что названия городов в таблице дорог соответствуют названиям городов со стоимостью бензина.\n");
+//			}
+//			else if (col == 0 && matrixCitiesLabes[row] != value) {
+//				throw InvalidInputFileException("Названия города несимметричны."
+//					"Убедитесь, что названия городов в таблице дорог записаны верно.\n");
+//			}
+//
+//			if (value != "" && col > 0) {
+//				if (valueContainsDigits) {
+//					roads[row][col - 1] = stoi(value);
+//				}				
+//				else {
+//					throw InvalidInputFileException("Неправильная запись задаваемого количества литров между городами. "
+//						"Убедитесь, что количество литров для дороги является неотрицательным числом.\n");
+//				}
+//			}
+//			
+//			col++;
+//			if (col > citiesLabes.size() + 1) {
+//				throw InvalidInputFileException("Во входной строке неправильное количество параметров. "
+//					"Убедитесь, что количество цен за стоимость бензина равно количеству городов.\n");
+//			}
+//		}
+//		row++;
+//		if (row > citiesLabes.size()) {
+//			throw InvalidInputFileException("Во входной строке неправильное количество параметров. "
+//				"Убедитесь, что количество городов равны.\n");
+//		}
+//	}
+//
+//	file.close();
+//
+//	// Вернуть вектор названий городов
+//	return citiesLabes;
+//}
 
-void multiplyCostsAndRoads(vector<vector<int>>& roads, vector<int>& costs, int amountCities) {
+void multiplyCostsAndRoads(vector<vector<int>>& roads, vector<int>& costs) {
 
-	for (int i = 0; i < amountCities - 1; i++) {
-		for (int j = i; j < amountCities; j++) {
+	for (int i = 0; i < costs.size() - 1; i++) {
+		for (int j = i; j < costs.size(); j++) {
 			roads[i][j] = roads[i][j] * costs[i];
 			roads[j][i] = roads[j][i] * costs[j];
 			
@@ -144,9 +271,7 @@ void multiplyCostsAndRoads(vector<vector<int>>& roads, vector<int>& costs, int a
 				throw InvalidValueException("Дороги могут быть только двусторонними. "
 						"Убедитесь, что существуют оба пути между городами.\n");
 			}
-			
-			// 
-
+						
 		}
 	}
 
@@ -176,14 +301,14 @@ int findCheapestPath(vector<vector<int>> roads, int amountRoads, int source) {
 
 }
 
-void outputResultToFile(vector<vector<int>> roads, vector<string> citiesLabels)
-{
-	//вывод в файл
-	ofstream fout;
-	fout.open("output.txt");
-	fout << findCheapestPath(roads, citiesLabels.size(), 0);
-	fout.close();
-}
+//void outputResultToFile(vector<vector<int>> roads, vector<string> citiesLabels)
+//{
+//	//вывод в файл
+//	ofstream fout;
+//	fout.open("output.txt");
+//	fout << findCheapestPath(roads, citiesLabels.size(), 0);
+//	fout.close();
+//}
 
 void validateInputData(vector<vector<int>> roads, vector<int> costs) {
 
@@ -197,7 +322,7 @@ int main(int argc, char* argv[]) {
 	vector<vector<int>> matrixRoads;
 	vector<int> costs;
 
-	/*if (argc != 3)
+	if (argc != 3)
 	{
 		std::cerr << "Неправильно указаны параметры запуска. "
 			"Убедитесь, что параметры соотвествуют шаблону: \n"
@@ -212,38 +337,36 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 	
-	filesystem::path output_path = filesystem::path(argv[2]);
+	filesystem::path outputPath = filesystem::path(argv[2]);
 
-	if (!(filesystem::exists(output_path.parent_path()) &&
-		filesystem::is_directory(output_path.parent_path()) &&
-		output_path.has_filename()))
+	if (!(filesystem::exists(outputPath.parent_path()) &&
+		filesystem::is_directory(outputPath.parent_path()) &&
+		outputPath.has_filename()))
 	{
 		std::cerr << "Неверно указан файл для выходных данных. "
 			"Возможно указанного расположения не существует или нет прав на запись." << '\n';
 		return 1;
 	}
-	std::ofstream output_file(output_path);
 
-	if (!output_file.is_open()) {
+	std::ofstream outputFile(outputPath);
+
+	if (!outputFile.is_open()) {
 		std::cerr << "Неверно указан файл для выходных данных. "
 			"Возможно указанного расположения не существует или нет прав на запись." << '\n';
 		return 1;
-	}*/
+	}
 	
 
 	//Считать данные из файла
 	try
 	{
-		//auto citiesLabels = readDataFromFile(argv[1], matrixRoads, costs);		 
+		auto citiesLabels = readDataFromFile(argv[1], matrixRoads, costs);		 
 
-		auto citiesLabels = readDataFromFile(matrixRoads, costs);
+		//auto citiesLabels = readDataFromFile(matrixRoads, costs);
 
 		// Преобразовать дороги и стоимости в матрицу смежности
-		multiplyCostsAndRoads(matrixRoads, costs, costs.size());
-
-		// Вывести решение в файл
-		outputResultToFile(matrixRoads, citiesLabels);
-		
+		multiplyCostsAndRoads(matrixRoads, costs);
+				
 	}
 	catch (const InvalidInputFileException& e)
 	{
@@ -255,8 +378,44 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 	
-	// outputFile 
+	outputFile << findCheapestPath(matrixRoads, costs.size(), 0);
 
+	// Закрыть файлы
+	inputFile.close();
+	outputFile.close();
 
 	return 0;
 }
+
+//int main() {
+//	setlocale(LC_ALL, "Russian");
+//
+//	vector<vector<int>> matrixRoads;
+//	vector<int> costs;
+//
+//	//Считать данные из файла
+//	try
+//	{
+//		//auto citiesLabels = readDataFromFile(argv[1], matrixRoads, costs);		 
+//
+//		auto citiesLabels = readDataFromFile(matrixRoads, costs);
+//
+//		// Преобразовать дороги и стоимости в матрицу смежности
+//		multiplyCostsAndRoads(matrixRoads, costs, costs.size());
+//
+//		// Вывести решение в файл
+//		outputResultToFile(matrixRoads, citiesLabels);
+//
+//	}
+//	catch (const InvalidInputFileException& e)
+//	{
+//		std::cerr << e.what();
+//		return 1;
+//	}
+//	catch (const InvalidValueException& e) {
+//		std::cerr << e.what();
+//		return 1;
+//	}
+//
+//	return 0;
+//}
