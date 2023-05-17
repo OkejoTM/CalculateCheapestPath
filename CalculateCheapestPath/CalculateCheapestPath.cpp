@@ -32,16 +32,29 @@ private:
 	std::string m_message;
 };
 
-bool checkStringIsDigit(const std::string s) {
-	int i = 0; int k = 0;
-	for (int i = 0; i < s.size(); i++) {
-		if (s[i] < '0' || s[i] > '9') {
+/*! Проверяет, что строка состоит только из цифр.
+* \param[in] str - строка
+* \return – результат проверки
+*/
+bool checkStringIsDigit(const std::string str) {
+	int i = 0; int c = 0;
+	for (; i < str.size(); i++) {
+		if (str[i] < '0' || str[i] > '9') {
 			return false;
 		}
+		if (str[i] == '0' && i == 0) {
+			c++;
+		}
 	}
+	if (c == 1 && i == c) return true;
+	if (c > 0) return false;
 	return true;
 }
 
+/*! Проверяет, что строка состоит только из пробелов.
+* \param[in] str - строка
+* \return – результат проверки
+*/
 bool onlySpaces(const std::string str) {
 	for (char ch : str) {
 		if (ch != ' ') {
@@ -51,8 +64,14 @@ bool onlySpaces(const std::string str) {
 	return true;
 }
 
+/*! Считывание входных данных
+* \param[in] inputFilePath - путь файла с входными данными
+* \param[in/out] roads - таблица дорог
+* \param[in/out] costs - таблица стоимостей 1 литра бензина в городах
+*/
 vector<string> readDataFromFile(const std::string& inputFilePath, vector<vector<int>>& roads, vector<int>& costs)
 {
+
 	std::ifstream file(inputFilePath);
 
 	// Считать первую строку файла
@@ -72,9 +91,11 @@ vector<string> readDataFromFile(const std::string& inputFilePath, vector<vector<
 		citiesLabes.push_back(label);			
 	}	
 
+	// Переопределить размеры исходных векторов
 	roads.resize(citiesLabes.size(), vector<int>(citiesLabes.size(), 0));
 	costs.resize(citiesLabes.size(), 0);
 
+	// Считать вторую строку
 	std::getline(file, line);
 	if (onlySpaces(line)) throw InvalidInputFileException("Неправильная запись данных. " "Проверьте, что строки записаны подряд без пустых строк.\n");
 	ss.clear();
@@ -82,10 +103,11 @@ vector<string> readDataFromFile(const std::string& inputFilePath, vector<vector<
 	int costValueCol = 0;
 	string costVal;
 
-	// Считывание стоимости дорог
+	// Пока в строке не закончились значения, которые можно выделить через разделитель
 	while (std::getline(ss, costVal, ';')) {
 		
-		bool containsDigits = checkStringIsDigit(costVal); // Проверка, что строка содержит только цифры.
+		// Проверить, что значением является неотрицательное число.
+		bool containsDigits = checkStringIsDigit(costVal);
 
 		 if (costVal == "") {
 			throw InvalidInputFileException("Неправильная запись стоимости бензина. "
@@ -397,22 +419,30 @@ vector<string> readDataFromFile(const std::string& inputFilePath, vector<vector<
 //	return citiesLabes;
 //}
 
-void multiplyCostsAndRoads(vector<vector<int>>& roads, vector<int>& costs) {
+/*! Перемножает значения стоимостей литра бензина с соответствующими дорогами
+* \param[in\out] roads - матрица дорог.
+* \param[in] costs - вектор стоимостей литра бензина в городах
+*/
+void multiplyCostsAndRoads(vector<vector<int>>& roads, vector<int>& costs) 
+{
 
-	for (int i = 0; i < costs.size() - 1; i++) {
+	// Для каждого элемента i до последнего
+	for (int i = 0; i < costs.size(); i++) {
+		// Для каждого элемента j начиная с i до последнего
 		for (int j = i; j < costs.size(); j++) {
-			roads[i][j] = roads[i][j] * costs[i];
+			// Перемножить симметричные значения матрицы дорог с соответствующими значениями стоимости бензина в городах, относительно главной диагонали
+			roads[i][j] = roads[i][j] * costs[i]; 
 			roads[j][i] = roads[j][i] * costs[j];
 			
 			int first = roads[i][j];
 			int second = roads[j][i];
-			// Обработать петлю
+			// Выдать ошбику, если обнаружена петля
 			if (i == j && first != 0)
 			{
 				throw InvalidValueException("Не может быть петли. "
 						"Убедитесь, что схема дорог города не содержит дорог, которые соединяют один и тот же город.\n");
 			}
-			// обработать двусторонние дороги
+			// Выдать ошибку, если обнаружена односторонняя дорога.
 			if ( (first == 0 && second != 0) || (first != 0 && second == 0)) {
 				throw InvalidValueException("Дороги могут быть только двусторонними. "
 						"Убедитесь, что существуют оба пути между городами.\n");
@@ -421,28 +451,41 @@ void multiplyCostsAndRoads(vector<vector<int>>& roads, vector<int>& costs) {
 		}
 	}
 
+
 }
 
-int findCheapestPath(vector<vector<int>> roads, int amountRoads, int source) {
+/*! Найти самый дешевый путь из первого города в последний
+* \param[in] roads - матрица смежности.
+* \param[in] source - первоначальная вершина.
+* \return - Минимальная стоимость из первого города в последний
+*/
+int findCheapestPath(vector<vector<int>> roads, int source) {
 
-	// Инициализировать все растояния 
-	vector<int> distances(amountRoads, INT_MAX);
+	// Инициализировать все растояния как бесконечные, кроме исходной
+	vector<int> distances(roads[0].size(), INT_MAX);
 	distances[source] = 0;
 
+	// Поместить исходную вершину в приоитетную очередь
 	priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pQueue;
 	pQueue.push(make_pair(0, source));
 
+	// Пока остались вершины, расстояние до которых можно уменьшить
 	while (!pQueue.empty()) {
+		
+		// Получить вершину с наименьшим расстоянием и удалить ее с очереди
 		int u = pQueue.top().second;
 		pQueue.pop();
 
-		for (int v = 0; v < amountRoads; v++) {
+		// Для каждой вершины 
+		for (int v = 0; v < roads[0].size(); v++) {
+			// Если можно произвести уменьшение расстояния до вершины
 			if (roads[u][v] != 0 && distances[v] > distances[u] + roads[u][v]) {
-				distances[v] = distances[u] + roads[u][v];
-				pQueue.push(make_pair(distances[v], v));
+				distances[v] = distances[u] + roads[u][v]; // Вычислить минимальное растояние до вершины
+				pQueue.push(make_pair(distances[v], v)); // Добавить в очередь растояние до вершины и саму вершину
 			}
 		}
 	}
+	// Вернуть растояние до последней вершины
 	return distances.back();
 
 }
@@ -518,7 +561,7 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 	
-	outputFile << findCheapestPath(matrixRoads, costs.size(), 0);
+	outputFile << findCheapestPath(matrixRoads, 0);
 
 	// Закрыть файлы
 	inputFile.close();
