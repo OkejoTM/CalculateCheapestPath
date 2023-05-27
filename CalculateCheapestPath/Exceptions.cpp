@@ -1,4 +1,4 @@
-#include <exception>
+﻿#include <exception>
 #include <string>
 #include "Exceptions.h"
 
@@ -15,4 +15,4 @@ InvalidValueException::InvalidValueException(const std::string& message) : m_mes
 
 const char* InvalidValueException::what() const noexcept {
 	return m_message.c_str();
-}
+} 

@@ -1,0 +1,496 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>CalculateCheapestPath: Файл C:/Users/tikom/source/Kursovaya/CalculateCheapestPath/CalculateCheapestPath/CalculateCheapestPath.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">CalculateCheapestPath
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_b9d18dd95516d155cab85c4f32842627.html">CalculateCheapestPath</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Функции</a>  </div>
+  <div class="headertitle">
+<div class="title">Файл CalculateCheapestPath.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Функции, необходимые для работы с выражениями программы  
+<a href="#details">Подробнее...</a></p>
+<div class="textblock"><code>#include &lt;string&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+</div>
+<p><a href="_calculate_cheapest_path_8h_source.html">См. исходные тексты.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Функции</h2></td></tr>
+<tr class="memitem:abe36ad92ad34cad0562a604aca40967b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_calculate_cheapest_path_8h.html#abe36ad92ad34cad0562a604aca40967b">checkStringIsDigit</a> (const std::string str)</td></tr>
+<tr class="memdesc:abe36ad92ad34cad0562a604aca40967b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Проверяет, что строка состоит только из цифр.  <a href="#abe36ad92ad34cad0562a604aca40967b">Подробнее...</a><br /></td></tr>
+<tr class="separator:abe36ad92ad34cad0562a604aca40967b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15cdac04cfb1fbf355a113fe334fdda5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_calculate_cheapest_path_8h.html#a15cdac04cfb1fbf355a113fe334fdda5">onlySpaces</a> (const std::string str)</td></tr>
+<tr class="memdesc:a15cdac04cfb1fbf355a113fe334fdda5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Проверяет, что строка состоит только из пробелов.  <a href="#a15cdac04cfb1fbf355a113fe334fdda5">Подробнее...</a><br /></td></tr>
+<tr class="separator:a15cdac04cfb1fbf355a113fe334fdda5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8a31888b7197e9189fa1bc72271197b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_calculate_cheapest_path_8h.html#ab8a31888b7197e9189fa1bc72271197b">fillLineInVector</a> (const string line, vector&lt; int &gt; &amp;filledVector, const char delimeter)</td></tr>
+<tr class="memdesc:ab8a31888b7197e9189fa1bc72271197b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Заполняет вектор данными из строки  <a href="#ab8a31888b7197e9189fa1bc72271197b">Подробнее...</a><br /></td></tr>
+<tr class="separator:ab8a31888b7197e9189fa1bc72271197b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af790af40483317636d96732a1e948ede"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_calculate_cheapest_path_8h.html#af790af40483317636d96732a1e948ede">tablesValidation</a> (const vector&lt; int &gt; &amp;costs, const vector&lt; vector&lt; int &gt;&gt; &amp;roads)</td></tr>
+<tr class="memdesc:af790af40483317636d96732a1e948ede"><td class="mdescLeft">&#160;</td><td class="mdescRight">Валидация таблиц  <a href="#af790af40483317636d96732a1e948ede">Подробнее...</a><br /></td></tr>
+<tr class="separator:af790af40483317636d96732a1e948ede"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58ff8529feaf66120c9287e3773566ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_calculate_cheapest_path_8h.html#a58ff8529feaf66120c9287e3773566ec">readCostsTable</a> (const string &amp;inputFilePath, vector&lt; int &gt; &amp;costs)</td></tr>
+<tr class="memdesc:a58ff8529feaf66120c9287e3773566ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Считать таблицу стоимостей 1 литра бензина  <a href="#a58ff8529feaf66120c9287e3773566ec">Подробнее...</a><br /></td></tr>
+<tr class="separator:a58ff8529feaf66120c9287e3773566ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36849c5be13d0f26cb9ed89744551bab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_calculate_cheapest_path_8h.html#a36849c5be13d0f26cb9ed89744551bab">readRoadsTable</a> (const string &amp;inputFilePath, vector&lt; vector&lt; int &gt;&gt; &amp;roads)</td></tr>
+<tr class="memdesc:a36849c5be13d0f26cb9ed89744551bab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Считать таблицу дорог  <a href="#a36849c5be13d0f26cb9ed89744551bab">Подробнее...</a><br /></td></tr>
+<tr class="separator:a36849c5be13d0f26cb9ed89744551bab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af673aa7f78267552ac6d0650d6e09b06"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_calculate_cheapest_path_8h.html#af673aa7f78267552ac6d0650d6e09b06">multiplyCostsAndRoads</a> (vector&lt; vector&lt; int &gt;&gt; &amp;roads, const vector&lt; int &gt; &amp;costs)</td></tr>
+<tr class="memdesc:af673aa7f78267552ac6d0650d6e09b06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Перемножает значения стоимостей литра бензина с соответствующими дорогами  <a href="#af673aa7f78267552ac6d0650d6e09b06">Подробнее...</a><br /></td></tr>
+<tr class="separator:af673aa7f78267552ac6d0650d6e09b06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cc8c4724b31ad4784178da6febaee41"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_calculate_cheapest_path_8h.html#a4cc8c4724b31ad4784178da6febaee41">calculateCheapestPath</a> (const vector&lt; vector&lt; int &gt;&gt; &amp;roads, int source)</td></tr>
+<tr class="memdesc:a4cc8c4724b31ad4784178da6febaee41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Найти самый дешевый путь из первого города в последний  <a href="#a4cc8c4724b31ad4784178da6febaee41">Подробнее...</a><br /></td></tr>
+<tr class="separator:a4cc8c4724b31ad4784178da6febaee41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>Функции, необходимые для работы с выражениями программы </p>
+<p>Данный файл содержит функции программы </p>
+</div><h2 class="groupheader">Функции</h2>
+<a id="a4cc8c4724b31ad4784178da6febaee41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cc8c4724b31ad4784178da6febaee41">&#9670;&nbsp;</a></span>calculateCheapestPath()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int calculateCheapestPath </td>
+          <td>(</td>
+          <td class="paramtype">const vector&lt; vector&lt; int &gt;&gt; &amp;&#160;</td>
+          <td class="paramname"><em>roads</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>source</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Найти самый дешевый путь из первого города в последний </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">roads</td><td>- матрица смежности. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">source</td><td>- первоначальная вершина. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Исключения</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="class_invalid_value_exception.html" title="Исключение неверного значения ">InvalidValueException</a></td><td>- количество городов меньше 1 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>- минимальная стоимость из первого города в последний </dd></dl>
+
+</div>
+</div>
+<a id="abe36ad92ad34cad0562a604aca40967b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe36ad92ad34cad0562a604aca40967b">&#9670;&nbsp;</a></span>checkStringIsDigit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool checkStringIsDigit </td>
+          <td>(</td>
+          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramname"><em>str</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Проверяет, что строка состоит только из цифр. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">str</td><td>- строка </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>– результат проверки </dd></dl>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="_calculate_cheapest_path_8h_abe36ad92ad34cad0562a604aca40967b_icgraph.png" border="0" usemap="#_calculate_cheapest_path_8h_abe36ad92ad34cad0562a604aca40967b_icgraph" alt=""/></div>
+<map name="_calculate_cheapest_path_8h_abe36ad92ad34cad0562a604aca40967b_icgraph" id="_calculate_cheapest_path_8h_abe36ad92ad34cad0562a604aca40967b_icgraph">
+<area shape="rect" id="node2" href="_calculate_cheapest_path_8h.html#ab8a31888b7197e9189fa1bc72271197b" title="Заполняет вектор данными из строки " alt="" coords="180,32,285,60"/>
+<area shape="rect" id="node3" href="_calculate_cheapest_path_8h.html#a58ff8529feaf66120c9287e3773566ec" title="Считать таблицу стоимостей 1 литра бензина " alt="" coords="335,5,446,33"/>
+<area shape="rect" id="node4" href="_calculate_cheapest_path_8h.html#a36849c5be13d0f26cb9ed89744551bab" title="Считать таблицу дорог " alt="" coords="333,57,447,85"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ab8a31888b7197e9189fa1bc72271197b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8a31888b7197e9189fa1bc72271197b">&#9670;&nbsp;</a></span>fillLineInVector()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fillLineInVector </td>
+          <td>(</td>
+          <td class="paramtype">const string&#160;</td>
+          <td class="paramname"><em>line</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vector&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>filledVector</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char&#160;</td>
+          <td class="paramname"><em>delimeter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Заполняет вектор данными из строки </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">line</td><td>- строка, данные которой записаны через разделитель </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">filledVector</td><td>- заполняемый вектор </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">delimeter</td><td>- разделитель </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Исключения</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="class_invalid_value_exception.html" title="Исключение неверного значения ">InvalidValueException</a></td><td>- пустая строка </td></tr>
+    <tr><td class="paramname"><a class="el" href="class_invalid_input_file_exception.html" title="Исключение неверного ввода данных ">InvalidInputFileException</a></td><td>- значением таблицы не является неотрицательное целое число </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="_calculate_cheapest_path_8h_ab8a31888b7197e9189fa1bc72271197b_cgraph.png" border="0" usemap="#_calculate_cheapest_path_8h_ab8a31888b7197e9189fa1bc72271197b_cgraph" alt=""/></div>
+<map name="_calculate_cheapest_path_8h_ab8a31888b7197e9189fa1bc72271197b_cgraph" id="_calculate_cheapest_path_8h_ab8a31888b7197e9189fa1bc72271197b_cgraph">
+<area shape="rect" id="node2" href="_calculate_cheapest_path_8h.html#abe36ad92ad34cad0562a604aca40967b" title="Проверяет, что строка состоит только из цифр. " alt="" coords="159,5,285,33"/>
+</map>
+</div>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="_calculate_cheapest_path_8h_ab8a31888b7197e9189fa1bc72271197b_icgraph.png" border="0" usemap="#_calculate_cheapest_path_8h_ab8a31888b7197e9189fa1bc72271197b_icgraph" alt=""/></div>
+<map name="_calculate_cheapest_path_8h_ab8a31888b7197e9189fa1bc72271197b_icgraph" id="_calculate_cheapest_path_8h_ab8a31888b7197e9189fa1bc72271197b_icgraph">
+<area shape="rect" id="node2" href="_calculate_cheapest_path_8h.html#a58ff8529feaf66120c9287e3773566ec" title="Считать таблицу стоимостей 1 литра бензина " alt="" coords="160,5,272,33"/>
+<area shape="rect" id="node3" href="_calculate_cheapest_path_8h.html#a36849c5be13d0f26cb9ed89744551bab" title="Считать таблицу дорог " alt="" coords="159,57,273,85"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="af673aa7f78267552ac6d0650d6e09b06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af673aa7f78267552ac6d0650d6e09b06">&#9670;&nbsp;</a></span>multiplyCostsAndRoads()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void multiplyCostsAndRoads </td>
+          <td>(</td>
+          <td class="paramtype">vector&lt; vector&lt; int &gt;&gt; &amp;&#160;</td>
+          <td class="paramname"><em>roads</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const vector&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>costs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Перемножает значения стоимостей литра бензина с соответствующими дорогами </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">roads</td><td>- матрица дорог. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">costs</td><td>- вектор стоимостей литра бензина в городах </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a15cdac04cfb1fbf355a113fe334fdda5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15cdac04cfb1fbf355a113fe334fdda5">&#9670;&nbsp;</a></span>onlySpaces()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool onlySpaces </td>
+          <td>(</td>
+          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramname"><em>str</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Проверяет, что строка состоит только из пробелов. </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">str</td><td>- строка </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Возвращает</dt><dd>– результат проверки </dd></dl>
+<div class="dynheader">
+Граф вызова функции:</div>
+<div class="dyncontent">
+<div class="center"><img src="_calculate_cheapest_path_8h_a15cdac04cfb1fbf355a113fe334fdda5_icgraph.png" border="0" usemap="#_calculate_cheapest_path_8h_a15cdac04cfb1fbf355a113fe334fdda5_icgraph" alt=""/></div>
+<map name="_calculate_cheapest_path_8h_a15cdac04cfb1fbf355a113fe334fdda5_icgraph" id="_calculate_cheapest_path_8h_a15cdac04cfb1fbf355a113fe334fdda5_icgraph">
+<area shape="rect" id="node2" href="_calculate_cheapest_path_8h.html#a58ff8529feaf66120c9287e3773566ec" title="Считать таблицу стоимостей 1 литра бензина " alt="" coords="144,5,256,33"/>
+<area shape="rect" id="node3" href="_calculate_cheapest_path_8h.html#a36849c5be13d0f26cb9ed89744551bab" title="Считать таблицу дорог " alt="" coords="143,57,257,85"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a58ff8529feaf66120c9287e3773566ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58ff8529feaf66120c9287e3773566ec">&#9670;&nbsp;</a></span>readCostsTable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void readCostsTable </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>inputFilePath</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vector&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>costs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Считать таблицу стоимостей 1 литра бензина </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">inputFilePath</td><td>- строка, содержащая путь к файлу </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">costs</td><td>- заполняемый вектор стоимостей 1 литра бензина </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Исключения</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="class_invalid_input_file_exception.html" title="Исключение неверного ввода данных ">InvalidInputFileException</a></td><td>- обнаружены пустые строки в файле </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="_calculate_cheapest_path_8h_a58ff8529feaf66120c9287e3773566ec_cgraph.png" border="0" usemap="#_calculate_cheapest_path_8h_a58ff8529feaf66120c9287e3773566ec_cgraph" alt=""/></div>
+<map name="_calculate_cheapest_path_8h_a58ff8529feaf66120c9287e3773566ec_cgraph" id="_calculate_cheapest_path_8h_a58ff8529feaf66120c9287e3773566ec_cgraph">
+<area shape="rect" id="node2" href="_calculate_cheapest_path_8h.html#a15cdac04cfb1fbf355a113fe334fdda5" title="Проверяет, что строка состоит только из пробелов. " alt="" coords="173,5,262,33"/>
+<area shape="rect" id="node3" href="_calculate_cheapest_path_8h.html#ab8a31888b7197e9189fa1bc72271197b" title="Заполняет вектор данными из строки " alt="" coords="165,57,270,85"/>
+<area shape="rect" id="node4" href="_calculate_cheapest_path_8h.html#abe36ad92ad34cad0562a604aca40967b" title="Проверяет, что строка состоит только из цифр. " alt="" coords="318,57,444,85"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a36849c5be13d0f26cb9ed89744551bab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36849c5be13d0f26cb9ed89744551bab">&#9670;&nbsp;</a></span>readRoadsTable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void readRoadsTable </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>inputFilePath</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vector&lt; vector&lt; int &gt;&gt; &amp;&#160;</td>
+          <td class="paramname"><em>roads</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Считать таблицу дорог </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">inputFilePath</td><td>- строка, содержащая путь к файлу </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">roads</td><td>- заполняемый двумерный вектор дорог </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Исключения</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="class_invalid_input_file_exception.html" title="Исключение неверного ввода данных ">InvalidInputFileException</a></td><td>- обнаружены пустые строки в файле </td></tr>
+    <tr><td class="paramname"><a class="el" href="class_invalid_input_file_exception.html" title="Исключение неверного ввода данных ">InvalidInputFileException</a></td><td>- количество городов в таблицах не одинаковое </td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="_calculate_cheapest_path_8h_a36849c5be13d0f26cb9ed89744551bab_cgraph.png" border="0" usemap="#_calculate_cheapest_path_8h_a36849c5be13d0f26cb9ed89744551bab_cgraph" alt=""/></div>
+<map name="_calculate_cheapest_path_8h_a36849c5be13d0f26cb9ed89744551bab_cgraph" id="_calculate_cheapest_path_8h_a36849c5be13d0f26cb9ed89744551bab_cgraph">
+<area shape="rect" id="node2" href="_calculate_cheapest_path_8h.html#a15cdac04cfb1fbf355a113fe334fdda5" title="Проверяет, что строка состоит только из пробелов. " alt="" coords="176,5,265,33"/>
+<area shape="rect" id="node3" href="_calculate_cheapest_path_8h.html#ab8a31888b7197e9189fa1bc72271197b" title="Заполняет вектор данными из строки " alt="" coords="168,57,273,85"/>
+<area shape="rect" id="node4" href="_calculate_cheapest_path_8h.html#abe36ad92ad34cad0562a604aca40967b" title="Проверяет, что строка состоит только из цифр. " alt="" coords="321,57,447,85"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="af790af40483317636d96732a1e948ede"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af790af40483317636d96732a1e948ede">&#9670;&nbsp;</a></span>tablesValidation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tablesValidation </td>
+          <td>(</td>
+          <td class="paramtype">const vector&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>costs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const vector&lt; vector&lt; int &gt;&gt; &amp;&#160;</td>
+          <td class="paramname"><em>roads</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Валидация таблиц </p>
+<dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">costs</td><td>- вектор стоимостей 1 литра бензина </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">roads</td><td>- таблица дорог </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Исключения</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="class_invalid_input_file_exception.html" title="Исключение неверного ввода данных ">InvalidInputFileException</a></td><td>- количество городов в таблицах не одинаковое </td></tr>
+    <tr><td class="paramname"><a class="el" href="class_invalid_input_file_exception.html" title="Исключение неверного ввода данных ">InvalidInputFileException</a></td><td>- количество дорог не соответствует количеству городов </td></tr>
+    <tr><td class="paramname"><a class="el" href="class_invalid_value_exception.html" title="Исключение неверного значения ">InvalidValueException</a></td><td>- обнаружена петля </td></tr>
+    <tr><td class="paramname"><a class="el" href="class_invalid_value_exception.html" title="Исключение неверного значения ">InvalidValueException</a></td><td>- обнаружена односторонняя дорога </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+</body>
+</html>

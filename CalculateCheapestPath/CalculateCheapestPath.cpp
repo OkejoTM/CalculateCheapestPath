@@ -4,8 +4,8 @@
 #include <sstream>
 #include <queue>
 #include "CalculateCheapestPath.h"
-#include "Exceptions.h"
-
+#include "Exceptions.h" 
+ 
 using namespace std;
 
 bool checkStringIsDigit(const std::string str) {
