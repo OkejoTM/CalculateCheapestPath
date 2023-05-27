@@ -1,40 +1,13 @@
 ﻿#include <iostream>
 #include <fstream>
 #include <filesystem>
-#include <string>
-#include <vector>
 #include <sstream>
 #include <queue>
-#include <exception>
+#include "CalculateCheapestPath.h"
+#include "Exceptions.h"
 
 using namespace std;
 
-class InvalidInputFileException : public std::exception {
-public:
-	InvalidInputFileException(const std::string& message) : m_message(message) {}
-
-	const char* what() const noexcept override {
-		return m_message.c_str();
-	}
-private:
-	std::string m_message;
-};
-
-class InvalidValueException : public std::exception {
-public:
-	InvalidValueException(const std::string& message) : m_message(message) {}
-
-	const char* what() const noexcept override {
-		return m_message.c_str();
-	}
-private:
-	std::string m_message;
-};
-
-/*! Проверяет, что строка состоит только из цифр.
-* \param[in] str - строка
-* \return – результат проверки
-*/
 bool checkStringIsDigit(const std::string str) {
 	int i = 0; int c = 0;
 	for (; i < str.size(); i++) {
@@ -48,15 +21,11 @@ bool checkStringIsDigit(const std::string str) {
 		}
 	}
 	if (c == 1 && i == c) return true; // Если значение является цифрой 0 - вернуть true;
-	else if (c == 1) return false; // Если значение начинается с 0, но не является цифрой 0 - вернуть false
+	else if (c == 1) return false; // Иначе Если значение начинается с 0, но не является цифрой 0 - вернуть false
 	if (i == 0) return false; // Если значение пустое - вернуть false
 	return true;
 }
 
-/*! Проверяет, что строка состоит только из пробелов.
-* \param[in] str - строка
-* \return – результат проверки
-*/
 bool onlySpaces(const std::string str) {
 	// Для каждого элемента стрроки
 	for (char ch : str) {
@@ -67,43 +36,40 @@ bool onlySpaces(const std::string str) {
 	return true; // Вернуть true
 }
 
-/*! Заполнить вектор данными из строки
-* param[in] line - строка
-* param[in/out] filledVector - заполняемый вектор
-*/
-void fillLineInVector(const string line, vector<int>& filledVector) 
+void fillLineInVector(const string line, vector<int>& filledVector, const char delimeter) 
 {
+	// Если размер строки меньше 1 - выдать исключение
+	if (line.size() < 1) {
+		throw InvalidValueException("Неверная запись строки. "
+			"Убедитесь, что строка не пустая.\n");
+	}
 	stringstream ss(line); // Загрузить строку в поток
 	string costVal;
 
-	// Спарсить стоимости дорог в вектор
-	while (std::getline(ss, costVal, ';')) {
-		bool isDigit = checkStringIsDigit(costVal); // Проверка, что строка содержит только цифры.		
+	// Пока в строке есть разделители
+	while (std::getline(ss, costVal, delimeter)) {
+		bool isDigit = checkStringIsDigit(costVal); // Проверка, что строкой является неотрицательное число.		
 
 		if (isDigit) {
 			filledVector.push_back(stoi(costVal));
 		}
 		else {
-			throw InvalidInputFileException("Неправильная запись входных данных. " "Убедитесь, что значением таблицы является неотрицательное число.\n");
+			throw InvalidInputFileException("Неверная запись входных данных. " "Убедитесь, что значением таблицы является неотрицательное число.\n");
 		}
 	}
 }
 
-/*! Валидация таблиц
-* param[in] costs - вектор стоимостей 1 литра бензина
-* param[in] roads - таблица дорог
-*/
-void tablesValidation(const vector<int> costs, const vector<vector<int>> roads) 
+void tablesValidation(const vector<int>& costs, const vector<vector<int>>& roads) 
 {
 	// Проверить размерности таблиц
 	if (roads.size() != costs.size()) {
-		throw InvalidInputFileException("Неправильная запись входных данных. "
+		throw InvalidInputFileException("Неверная запись входных данных. "
 			"Убедитесь, что количество городов в таблицах одинаково.\n");
 	}
 	for (int i = 0; i < roads.size(); i++) {
 		if (roads[i].size() != costs.size()) {
-			throw InvalidInputFileException("Неправильная запись входных данных. "
-				"Убедитесь, что количество городов в таблицах одинаково.\n");
+			throw InvalidInputFileException("Неверная запись входных данных. "
+				"Убедитесь, что количество дорог равно количеству городов..\n");
 		}
 	}
 
@@ -127,10 +93,6 @@ void tablesValidation(const vector<int> costs, const vector<vector<int>> roads)
 	}
 }
 
-/*! Считать таблицу стоимостей 1 литра бензина
-* param[in] inputFilePath - строка, содержащая путь к файлу
-* param[in/out] costs - заполняемый вектор стоимостей 1 литра бензина
-*/
 void readCostsTable(const string& inputFilePath, vector<int>& costs)
 {
 	ifstream file(inputFilePath); // Открыть файл с таблицей стоимостей 1 литра бензина
@@ -138,63 +100,65 @@ void readCostsTable(const string& inputFilePath, vector<int>& costs)
 	// Считать строку файла
 	string line;
 	std::getline(file, line);
-	if (onlySpaces(line)) throw InvalidInputFileException("Неправильная запись данных. " "Проверьте, что строки записаны подряд без пустых строк.\n");
+	if (onlySpaces(line)) throw InvalidInputFileException("Неверная запись данных. " "Проверьте, что строки записаны подряд без пустых строк.\n");
 
 	// Спарсить стоимости дорог в вектор
-	fillLineInVector(line, costs);	
+	fillLineInVector(line, costs, ';');
 }
 
-/*! Считать таблицу дорог
-* param[in] inputFilePath - строка, содержащая путь к файлу
-* param[in/out] roads - заполняемый двумерный вектор дорог
-*/
 void readRoadsTable(const string& inputFilePath, vector<vector<int>>& roads) 
 {	
 	ifstream file(inputFilePath); // Открыть файл с таблицей городов
 
+	// Считать количество строк файла = 0
 	int i = 0;
 	// Пока есть строки в файле
 	string line;
 	while (std::getline(file, line))
 	{
 		// Если строка пустая - выдать исключение
-		if (onlySpaces(line)) throw InvalidInputFileException("Неправильная запись данных. " "Проверьте, что строки записаны подряд без пустых строк.\n");
-		//
+		if (onlySpaces(line)) throw InvalidInputFileException("Неверная запись данных. " "Проверьте, что строки записаны подряд без пустых строк.\n");
+		// Если количество строк
 		if (i == roads.size()) {
-			throw InvalidInputFileException("Неправильная запись входных данных. "
+			throw InvalidInputFileException("Неверная запись входных данных. "
 				"Убедитесь, что количество городов в таблицах одинаково.\n");
 		}
 
-		fillLineInVector(line, roads[i]);
+		// Заполнить вектор значениями из строки
+		fillLineInVector(line, roads[i], ';');
+		// Увеличить индекс текущей строки
 		i++;
 	}
 }
 
-
-/*! Перемножает значения стоимостей литра бензина с соответствующими дорогами
-* \param[in\out] roads - матрица дорог.
-* \param[in] costs - вектор стоимостей литра бензина в городах
-*/
-void multiplyCostsAndRoads(vector<vector<int>>& roads, vector<int>& costs) 
+void multiplyCostsAndRoads(vector<vector<int>>& roads, const vector<int>& costs) 
 {
 	// Для каждого элемента i до последнего
 	for (int i = 0; i < costs.size(); i++) {
 		// Для каждого элемента j начиная с i до последнего
 		for (int j = i; j < costs.size(); j++) {
-			// Перемножить симметричные значения матрицы дорог с соответствующими значениями стоимости бензина в городах, относительно главной диагонали
-			roads[i][j] = roads[i][j] * costs[i]; 
-			roads[j][i] = roads[j][i] * costs[j];												
+			// Если перемножается диагональные значения
+			if (i == j) 
+			{
+				roads[i][j] = roads[i][j] * costs[i]; // Перемножить 1 раз;
+			}
+			else // Иначе
+			{
+				// Перемножить симметричные значения матрицы дорог с соответствующими значениями стоимости бензина в городах, относительно главной диагонали
+				roads[i][j] = roads[i][j] * costs[i]; 
+				roads[j][i] = roads[j][i] * costs[j];												
+			}
 		}
 	}
 }
 
-/*! Найти самый дешевый путь из первого города в последний
-* \param[in] roads - матрица смежности.
-* \param[in] source - первоначальная вершина.
-* \return - Минимальная стоимость из первого города в последний
-*/
-int findCheapestPath(vector<vector<int>> roads, int source) 
+int calculateCheapestPath(const vector<vector<int>>& roads, int source) 
 {
+	// Если количество городов меньше единицы - выдать исключение
+	if (roads.size() < 1) {
+		throw InvalidValueException("Неверная запись входных данных. "
+			"Убедитесь, что количество городов больше 0.\n");
+	}
 	// Инициализировать все растояния как бесконечные, кроме исходной
 	vector<int> distances(roads[0].size(), INT_MAX);
 	distances[source] = 0;
@@ -292,7 +256,7 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 	
-	outputFile << findCheapestPath(matrixRoads, 0);
+	outputFile << calculateCheapestPath(matrixRoads, 0);
 
 	costsInputFile.close();
 	roadsInputFile.close();
