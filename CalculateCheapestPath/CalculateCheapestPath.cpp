@@ -45,16 +45,18 @@ void fillLineInVector(const string line, vector<int>& filledVector, const char d
 	}
 	stringstream ss(line); // Загрузить строку в поток
 	string costVal;
-
+	int col = 0;
 	// Пока в строке есть разделители
 	while (std::getline(ss, costVal, delimeter)) {
 		bool isDigit = checkStringIsDigit(costVal); // Проверка, что строкой является неотрицательное число.		
-
+		col++;
+		// Если элементом является число
 		if (isDigit) {
-			filledVector.push_back(stoi(costVal));
+			filledVector.push_back(stoi(costVal)); // добавить элемент в вектор
 		}
 		else {
-			throw InvalidInputFileException("Неверная запись входных данных. " "Убедитесь, что значением таблицы является неотрицательное число.\n");
+			string exceptionString = "Неверная запись входных данных. Убедитесь, что значением колонки " + to_string(col) + " является неотрицательное число.\n";
+			throw InvalidInputFileException(exceptionString);
 		}
 	}
 }

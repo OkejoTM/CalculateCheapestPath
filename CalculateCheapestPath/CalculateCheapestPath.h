@@ -9,7 +9,7 @@
 #include <string>
 #include <vector>
 using namespace std;
- 
+
 
 /*! 
 * \brief Проверяет, что строка состоит только из цифр.
