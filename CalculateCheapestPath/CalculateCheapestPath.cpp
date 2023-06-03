@@ -197,7 +197,7 @@ int main(int argc, char* argv[]) {
 
 	if (argc != 4)
 	{
-		std::cerr << "Неправильно указаны параметры запуска. "
+		std::cout << "Неправильно указаны параметры запуска. "
 			"Убедитесь, что параметры соотвествуют шаблону: \n"
 			<< argv[0] << " <path/to/input_file1> <path/to/input_file2> <path/to/save_file>\n";
 		return 1;
@@ -206,14 +206,14 @@ int main(int argc, char* argv[]) {
 	std::ifstream costsInputFile(argv[1]);
 
 	if (!costsInputFile.is_open()) {
-		std::cerr << "Неверно указан файл с входными данными. Возможно, файл не существует." << argv[1] << '\n';
+		std::cout << "Неверно указан файл с входными данными. Возможно, файл не существует." << argv[1] << '\n';
 		return 1;
 	}
 
 	std::ifstream roadsInputFile(argv[2]);
 
 	if (!roadsInputFile.is_open()) {
-		std::cerr << "Неверно указан файл с входными данными. Возможно, файл не существует." << argv[2] << '\n';
+		std::cout << "Неверно указан файл с входными данными. Возможно, файл не существует." << argv[2] << '\n';
 		return 1;
 	}
 	
@@ -223,7 +223,7 @@ int main(int argc, char* argv[]) {
 		filesystem::is_directory(outputPath.parent_path()) &&
 		outputPath.has_filename()))
 	{
-		std::cerr << "Неверно указан файл для выходных данных. "
+		std::cout << "Неверно указан файл для выходных данных. "
 			"Возможно указанного расположения не существует или нет прав на запись." << '\n';
 		return 1;
 	}
@@ -231,7 +231,7 @@ int main(int argc, char* argv[]) {
 	std::ofstream outputFile(outputPath);
 
 	if (!outputFile.is_open()) {
-		std::cerr << "Неверно указан файл для выходных данных. "
+		std::cout << "Неверно указан файл для выходных данных. "
 			"Возможно указанного расположения не существует или нет прав на запись." << '\n';
 		return 1;
 	}
@@ -250,11 +250,11 @@ int main(int argc, char* argv[]) {
 	}
 	catch (const InvalidInputFileException& e)
 	{
-		std::cerr << e.what();
+		std::cout << e.what();
 		return 1;
 	}
 	catch (const InvalidValueException& e) {
-		std::cerr << e.what();
+		std::cout << e.what();
 		return 1;
 	}
 	
