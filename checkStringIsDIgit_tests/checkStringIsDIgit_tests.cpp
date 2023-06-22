@@ -5,9 +5,9 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-namespace checkStringIsDIgittests
+namespace checkStringIsDigittests
 {
-	TEST_CLASS(checkStringIsDIgittests)
+	TEST_CLASS(checkStringIsDigittests)
 	{
 	public:
 		
@@ -82,5 +82,6 @@ namespace checkStringIsDIgittests
 			bool real_result = checkStringIsDigit(checkedString);
 			Assert::AreEqual((int)expected_result, (int)real_result);
 		}
+
 	};
 }

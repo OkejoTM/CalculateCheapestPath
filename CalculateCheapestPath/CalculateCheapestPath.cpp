@@ -8,21 +8,27 @@
  
 using namespace std;
 
-bool checkStringIsDigit(const std::string str) {
-	int i = 0; int c = 0;
-	for (; i < str.size(); i++) {
-		// Если текущим значением не является цифра - вернуть false
-		if (str[i] < '0' || str[i] > '9') {
+bool checkStringIsDigit(const std::string& str)
+{
+	if (str.empty())
+		return false;
+	
+	if (str[0] == '0') {
+		// Если строка состоит только из цифр
+		if (str.find_first_of('0') == str.size() - 1) {
+			return true;
+		}
+		else {
 			return false;
 		}
-		// Если текущим значением является 0 и это первое значение строки
-		if (str[i] == '0' && i == 0) {
-			c++; // Увеличить количество 0
+	}
+
+	for (char symbol : str) {
+		if (symbol < '0' ||  symbol> '9') {
+			return false;
 		}
 	}
-	if (c == 1 && i == c) return true; // Если значение является цифрой 0 - вернуть true;
-	else if (c == 1) return false; // Иначе Если значение начинается с 0, но не является цифрой 0 - вернуть false
-	if (i == 0) return false; // Если значение пустое - вернуть false
+
 	return true;
 }
 
@@ -190,7 +196,7 @@ int calculateCheapestPath(const vector<vector<int>>& roads, int source)
 }
 
 int main(int argc, char* argv[]) {
-	setlocale(LC_ALL, "Russian");
+	setlocale(LC_ALL, "Russian");	
 
 	vector<vector<int>> matrixRoads;
 	vector<int> costs;

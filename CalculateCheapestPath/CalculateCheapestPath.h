@@ -16,7 +16,7 @@ using namespace std;
 * \param[in] str - строка
 * \return – результат проверки
 */
-bool checkStringIsDigit(const std::string str);
+bool checkStringIsDigit(const std::string& str);
 
 /*! 
 * \brief Проверяет, что строка состоит только из пробелов.
